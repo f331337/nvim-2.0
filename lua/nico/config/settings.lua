@@ -25,10 +25,13 @@ o.termguicolors = true
 o.swapfile = false
 o.signcolumn = "yes"
 
+vim.cmd("colorscheme habamax")
+vim.api.nvim_set_hl(0, "Normal",      { bg = "none" })
+vim.api.nvim_set_hl(0, "NormalNC",    { bg = "none" })
+vim.api.nvim_set_hl(0, "SignColumn",  { bg = "none" })
+vim.api.nvim_set_hl(0, "EndOfBuffer", { bg = "none" })
 
 vim.keymap.set("n", "<leader>pv", vim.cmd.Ex)
-
 vim.keymap.set("n", "<leader>w", ':write<CR>')
 vim.keymap.set("n", "<leader>q", ':quit!<CR>')
-
 vim.keymap.set('n', "<leader>lf", vim.lsp.buf.format)
