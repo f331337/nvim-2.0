@@ -1,4 +1,3 @@
-local global = vim.g
 local o = vim.opt
 
 o.number = true
@@ -26,12 +25,32 @@ o.swapfile = false
 o.signcolumn = "yes"
 
 vim.cmd("colorscheme habamax")
-vim.api.nvim_set_hl(0, "Normal",      { bg = "none" })
-vim.api.nvim_set_hl(0, "NormalNC",    { bg = "none" })
-vim.api.nvim_set_hl(0, "SignColumn",  { bg = "none" })
+vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
+vim.api.nvim_set_hl(0, "NormalNC", { bg = "none" })
+vim.api.nvim_set_hl(0, "SignColumn", { bg = "none" })
 vim.api.nvim_set_hl(0, "EndOfBuffer", { bg = "none" })
 
 vim.keymap.set("n", "<leader>pv", vim.cmd.Ex)
 vim.keymap.set("n", "<leader>w", ':write<CR>')
 vim.keymap.set("n", "<leader>q", ':quit!<CR>')
-vim.keymap.set('n', "<leader>lf", vim.lsp.buf.format)
+
+
+vim.keymap.set("n", "<leader>lf", function()
+  local ft = vim.bo.filetype
+
+  if ft == "python" then
+    vim.lsp.buf.format()
+    return
+  end
+
+  if ft == "javascript"
+    or ft == "javascriptreact"
+    or ft == "typescript"
+    or ft == "typescriptreact"
+  then
+    vim.cmd("silent !prettier --write %")
+    vim.cmd("edit!")
+  end
+end, { desc = "Format (ruff / prettier)" })
+
+vim.keymap.set('n', '<leader>b', vim.diagnostic.open_float)
