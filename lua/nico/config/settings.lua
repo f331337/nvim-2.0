@@ -38,18 +38,17 @@ vim.keymap.set("n", "<leader>q", ':quit!<CR>')
 vim.keymap.set("n", "<leader>lf", function()
   local ft = vim.bo.filetype
 
-  if ft == "python" then
-    vim.lsp.buf.format()
-    return
-  end
-
   if ft == "javascript"
     or ft == "javascriptreact"
     or ft == "typescript"
     or ft == "typescriptreact"
-  then
+    or ft == "html"
+    or ft == "css"
+ then
     vim.cmd("silent !prettier --write %")
     vim.cmd("edit!")
+  else
+      vim.lsp.buf.format()
   end
 end, { desc = "Format (ruff / prettier)" })
 
