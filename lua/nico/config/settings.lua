@@ -23,6 +23,8 @@ o.splitbelow = true
 o.termguicolors = true
 o.swapfile = false
 o.signcolumn = "yes"
+o.colorcolumn = "80"
+
 
 vim.cmd("colorscheme habamax")
 vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
